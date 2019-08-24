@@ -1,0 +1,103 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# Getting started
+## Packages
+```{r}
+# install.packages('rvest')
+# install.packages('tcltk')
+library(rvest)
+library(tcltk)
+```
+## Parameters
+```{r}
+max_webpages <- 20
+```
+
+## Scrapping starting points
+```{r}
+#Specifying the url for desired website to be scraped
+url <- paste("https://www.zillow.com/homes/for_sale/ann-arbor_rb/",1:max_webpages,"_p/",sep = "")
+
+#Reading the HTML code from the website
+webpage <- lapply(url, FUN = read_html)
+```
+# Informations to extract
+1. Address
+2. Price
+3. Bedroom
+4. Bathrooms
+5. sqft
+6. days on zillow
+7. Views
+8. Saves
+9. Listing Agent
+10. Parking
+11. Type
+12. Year Built
+13. Heating
+14. Cooling
+15. Garage
+
+## Scraping first css selectors
+```{r}
+#Using CSS selectors to scrape
+
+for (i in 1:length(webpage)) {
+  
+}
+
+# create progress bar
+pb <- winProgressBar(title = "progress bar", min = 0,
+                     max = total, width = 300)
+
+for(i in 1:total){
+   Sys.sleep(0.1)
+   setWinProgressBar(pb, i, title=paste( round(i/total*100, 0),
+                                        "% done"))
+}
+close(pb)
+
+ # slow
+testit <- function(x = sort(runif(20)), ...)
+{
+    pb <- txtProgressBar(...)
+    for(i in c(0, x, 1)) {Sys.sleep(0.5); setTxtProgressBar(pb, i)}
+    Sys.sleep(1)
+    close(pb)
+}
+testit()
+testit(runif(10))
+testit(style = 3)
+
+
+
+
+address_data_html <- html_nodes(webpage,'.list-card-price')
+price_data_html <- html_nodes(webpage,'.list-card-price')
+bedroom_data_html <- html_nodes(webpage,'.list-card-price')
+bathroom_data_html <- html_nodes(webpage,'.list-card-price')
+sqft_data_html <- html_nodes(webpage,'.list-card-price')
+days_data_html <- html_nodes(webpage,'.list-card-price')
+price_data_html <- html_nodes(webpage,'zsg-table-interactive')
+price_data_html <- html_nodes(webpage,'.list-card-details')
+price_data_html <- html_nodes(webpage,'.ds-overview-stat-value')
+price_data_html <- html_nodes(webpage,'.list-card-in')
+price_data_html <- html_nodes(webpage,'.list-card-price')
+price_data_html <- html_nodes(webpage,'.list-card-price')
+
+#Converting the scraping data to text
+price_data <- html_text(price_data_html)
+
+head(price_data)
+
+html_nodes(webpage,'.list-card-link')
+html_nodes(webpage,'.zsg-pagination')
+
+# https://www.analyticsvidhya.com/blog/2017/03/beginners-guide-on-web-scraping-in-r-using-rvest-with-hands-on-knowledge/
+
+
+```
+
